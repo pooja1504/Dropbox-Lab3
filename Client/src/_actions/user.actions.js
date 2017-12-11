@@ -22,7 +22,7 @@ function login(email, password) {
         userService.login(email, password)
             .then(
                 responseJson => { 
-                    if(responseJson.code==200)
+                    if(responseJson.response.status=="success")
                     {
                     //dispatch(success(responseJson.user));
                     history.push('/Mainhome');

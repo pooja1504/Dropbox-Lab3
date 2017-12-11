@@ -23,7 +23,15 @@ public class UserController {
         return  userService.SignUp(user);
     }
     @RequestMapping(path="/checkusersession",method = RequestMethod.POST) // Map ONLY POST Requests
-    public SignInResponse CheckSession (@RequestBody User user) {
+    public Response CheckSession (@RequestBody User user) {
         return userService.CheckSession(user);
+    }
+    @RequestMapping(path="/getuserdetails",method = RequestMethod.POST) // Map ONLY POST Requests
+    public Response GetUserDetails (@RequestBody User user) {
+        return userService.GetUserDetails(user);
+    }
+    @RequestMapping(path="/edituserdetails",method = RequestMethod.POST) // Map ONLY POST Requests
+    public Response EditUserDetails (@RequestBody User user) {
+        return userService.EditUserDetails(user);
     }
 }

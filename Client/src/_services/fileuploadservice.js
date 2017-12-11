@@ -1,11 +1,12 @@
-const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001'
+const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:8080'
 export const fileuploadserv = {
     folderupload,
     sharefolder,
     listfiles,
     deletefile,
     uploadFile,
-    starfile
+    starfile,
+    folderdata
 };
 const headers = {
     'Accept': 'application/json'
@@ -13,7 +14,23 @@ const headers = {
 function folderupload(myfolder)
 {
     console.log("its folder in fileuploadserv"+myfolder);
-    return fetch('http://localhost:3001/folderupload', {
+    return fetch('http://localhost:8080/folder/createfolder', {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
+        headers: {...headers, 'Content-Type': 'application/json'},
+        body: JSON.stringify({myfolder})
+    }).then((response) => response.json()).then((responseJson) => {
+            return responseJson;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+}
+function folderdata(myfolder)
+{
+    console.log("its folder in fileuploadserv"+myfolder);
+    return fetch('http://localhost:8080/folder/getfolderdata', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
@@ -29,7 +46,7 @@ function folderupload(myfolder)
 function sharefolder(mysharedfolder,sharedemail)
 {
     console.log("its sharedfolder in fileuploadserv"+mysharedfolder,sharedemail);
-    return fetch(`${api}/sharefolder`, {
+    return fetch(`${api}/folder/sharefolder`, {
         method: 'POST',
         mode:'cors',
         credentials:'include',
@@ -43,7 +60,7 @@ function sharefolder(mysharedfolder,sharedemail)
     });
 }
 export const getImages = () =>
-    fetch(`${api}/files/`)
+    fetch(`${api}/folder/`)
         .then(res => res.json())
         .catch(error => {
             console.log("This is error.");
@@ -52,7 +69,7 @@ export const getImages = () =>
 
 function uploadFile(payload) {
 console.log(payload);
-    return fetch(`${api}/files/upload`, {
+    return fetch(`${api}/folder/upload`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -68,7 +85,7 @@ console.log(payload);
 
 function starfile(payload) {
     console.log(payload);
-    return fetch(`${api}/starfile`, {
+    return fetch(`${api}/folder/starfile`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -82,7 +99,7 @@ function starfile(payload) {
     });
 }
 export const sharefile = (payload,sharing_email) =>
-   fetch(`${api}/sharefile`, {
+   fetch(`${api}/folder/sharefile`, {
         method: 'POST',
         credentials:'include',
         mode:'cors',
@@ -95,7 +112,7 @@ export const sharefile = (payload,sharing_email) =>
             return error;
         });
 function listfiles() {
-    return fetch(`${api}/listfiles`, {
+    return fetch(`${api}/folder/listfiles`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors'
@@ -108,7 +125,7 @@ function listfiles() {
     });
 }
 function deletefile(file) {
-    return fetch(`${api}/deletefile`, {
+    return fetch(`${api}/folder/deletefile`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',

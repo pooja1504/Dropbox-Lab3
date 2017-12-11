@@ -13,5 +13,5 @@ export const store = createStore(
         loggerMiddleware
 
     ),
-    autoRehydrate()
+    //autoRehydrate()
 );

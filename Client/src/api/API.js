@@ -52,17 +52,3 @@ fetch(`${api}/listdir`, {
             return responseJson;
     ////handle response for file listing
 });
-
-
-
-
-
-
-/*.then(res => {
-        console.log("its response in listdir"+res.filelist);
-        return res;
-    })
-        .catch(error => {
-            console.log("This is error");
-            return error;
-        });*/

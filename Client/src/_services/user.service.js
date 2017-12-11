@@ -11,18 +11,19 @@ export const userService = {
 const headers = {
     'Accept': 'application/json'
 };
-function login(username, password) {
-    console.log("username"+username+"password"+password);
+function login(email, password) {
+    console.log("email"+email+"password"+password);
     const requestOptions = {
         method: 'POST',
         mod:'cors',
         headers: {...headers,'Content-Type': 'application/json' },
         credentials:'include',
-        body: JSON.stringify({username,password})
+        body: JSON.stringify({email,password})
     };
 
-    return fetch('http://localhost:3001/login', requestOptions)
+    return fetch('http://localhost:8080/user/signin', requestOptions)
         .then((response) => response.json()).then((responseJson) => {
+            console.log("its response in userservice"+responseJson.response.status);
     return responseJson;
 });
 }
@@ -35,7 +36,7 @@ function register(user) {
         headers: { ...headers,'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-    return fetch('http://localhost:3001/signup', requestOptions).then(handleResponse);
+    return fetch('http://localhost:8080/user/signup', requestOptions).then(handleResponse);
 }
 function checksession(){
     const status = 201;
