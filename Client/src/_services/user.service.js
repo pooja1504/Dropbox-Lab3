@@ -48,7 +48,7 @@ function checksession(){
         body: JSON.stringify({status})
     };
 
-    return fetch('http://localhost:3001/checkSession', requestOptions)
+    return fetch('http://localhost:8080/user/checkSession', requestOptions)
         .then((response) => response.json()).then((responseJson) => {
     return responseJson;
 });
@@ -63,7 +63,7 @@ function getDetails()
         headers: { ...headers,'Content-Type': 'application/json'},
     };
 
-    return fetch('http://localhost:3001/userdetails', requestOptions)
+    return fetch('http://localhost:8080/user/userdetails', requestOptions)
         .then((response) => response.json()).then((responseJson) => {
             return responseJson;
         });
@@ -77,7 +77,7 @@ function edituserdetails(user) {
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-    return fetch('http://localhost:3001/edituserdetails', requestOptions)
+    return fetch('http://localhost:8080/user/edituserdetails', requestOptions)
         .then((response) => response.json()).then((responseJson) => {
         return responseJson;
     });
